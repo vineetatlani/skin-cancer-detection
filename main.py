@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
+from os import remove
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
@@ -18,6 +19,7 @@ def pred_result(filepath):
 
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
 app = Flask(__name__)
+app.secret_key = 'this is my secret kry'
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -47,7 +49,7 @@ def process():
             result = "Benign, with probability" + str(result[0])
         else:
             result = "Malignant, with probability" + str(result[1])
-
+        remove(filepath)
         return render_template('home.html', result=result)
 
     return render_template('home.html')
