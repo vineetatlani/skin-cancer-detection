@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Cancer Detection</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/app.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" type="text/javascript"></script>
+    <script src="static/app.js" type="text/javascript"></script>
+    <script>
+       var loadFile = function (event) { 
+        var image = document.getElementById("image"); 
+        image.src = URL.createObjectURL(event.target.files[0]); 
+       }; 
+    </script>
+</head>
+<body>
+    <form action="process" method="POST" enctype="multipart/form-data">>
+  
+        <h1><strong>Skin Cancer Detection</strong> using image classification</h1>
+        
+        <div class="form-group">
+          <label for="name"><span>Patient's Name</span></label>
+          <input  type="text" name="name" id="title" class="form-controll"/>
+
+        </div>
+       
+        <div class="form-group file-area">
+          <img src="" alt="" id="image" width="315px" height="200px" /> 
+          <label for="images">Images <span>Your images should be at least 256x256 </span></label>
+          <input  type="file" name="image" accept="image/jpeg, image/jpg" onchange="loadFile(event)" id="file" required="required"/>
+
+        </div>
+        <div class="form-group">
+          <button type="submit">Predict</button>
+        </div>
+        
+      </form>
+      
+    {% if result %}
+    <script>
+         $("<style type='text/css'>#boxMX{display:none;background: #333;padding: 10px;border: 2px solid #ddd;float: left;font-size: 1.2em;position: fixed;top: 50%; left: 50%;z-index: 99999;box-shadow: 0px 0px 20px #999; -moz-box-shadow: 0px 0px 20px #999; -webkit-box-shadow: 0px 0px 20px #999; border-radius:6px 6px 6px 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; font:13px Arial, Helvetica, sans-serif; padding:6px 6px 4px;width:300px; color: white;}</style>").appendTo("head");
+
+         function alertMX(t){
+         $( "body" ).append( $( "<div id='boxMX'><p class='msgMX'></p><button>CLOSE</button></div>" ) );
+         $('.msgMX').text(t); var popMargTop = ($('#boxMX').height() + 24) / 2, popMargLeft = ($('#boxMX').width() + 24) / 2; 
+         $('#boxMX').css({ 'margin-top' : -popMargTop,'margin-left' : -popMargLeft}).fadeIn(600);
+         $("#boxMX").click(function() { $(this).remove(); });  };
+
+         alertMX("{{result}}");
+    </script>
+ {% endif %}
+      
+      
+      
+      
+      
+      <link href='https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700' rel='stylesheet' type='text/css'>
+      
+</body>
+</html>

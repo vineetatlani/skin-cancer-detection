@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from os import remove
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
+from keras.models import load_model
+from keras.preprocessing import image
 import numpy as np
 
 model = load_model('skin_cancer_detection-6.h5')
@@ -27,7 +27,7 @@ def allowed_file(filename):
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('other.html')
 
 @app.route('/process', methods=['POST'])
 def process():
@@ -50,9 +50,9 @@ def process():
         else:
             result = "Malignant, with probability" + str(result[1])
         remove(filepath)
-        return render_template('home.html', result=result)
+        return render_template('other.html', result=result)
 
-    return render_template('home.html')
+    return render_template('other.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
