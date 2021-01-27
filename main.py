@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect, flash
 from werkzeug.utils import secure_filename
 from os.path import join, dirname, realpath
 from os import remove
-from keras.models import load_model
-from keras.preprocessing import image
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
 import numpy as np
 
 model = load_model('skin_cancer_detection-6.h5')
