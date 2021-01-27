@@ -1,4 +1,4 @@
 Flask==1.1.2
 numpy 
-keras
+tensorflow==2.3.0
 gunicorn
