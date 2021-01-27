@@ -45,10 +45,16 @@ def process():
         filepath = 'images/'+secure_filename(file.filename)
         file.save(filepath)
         result = pred_result(filepath)
-        if result[0] > result[1]:
-            result = "Benign, with probability" + str(result[0])
+        # if result[0] > result[1]:
+	    #     result = "Benign, with probability" + str(result[0])
+        # else:
+        #     result = "Malignant, with probability" + str(result[1])
+        if result[1] > result[0]:
+            result = "Malignant, with probability: " + str(result[1]*100)
+        elif result[0] < 0.8:
+            result = result = "Benign, with probability: " + str(result[0]*100) + ", Get it checked"
         else:
-            result = "Malignant, with probability" + str(result[1])
+            result = "Benign, with probability: " + str(result[0]*100)
         remove(filepath)
         return render_template('other.html', result=result)
 

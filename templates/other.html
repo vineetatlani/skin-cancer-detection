@@ -19,7 +19,7 @@
     </script>
 </head>
 <body>
-    <form action="process" method="POST" enctype="multipart/form-data">>
+    <form action="process" method="POST" enctype="multipart/form-data">
   
         <h1><strong>Skin Cancer Detection</strong> using image classification</h1>
         
@@ -30,9 +30,9 @@
         </div>
        
         <div class="form-group file-area">
-          <img src="" alt="" id="image" width="315px" height="200px" /> 
+          <img src="static/pictureinput.jpg" alt="" id="image" width="315px" height="200px" /> 
           <label for="images">Images <span>Your images should be at least 256x256 </span></label>
-          <input  type="file" name="image" accept="image/jpeg, image/jpg" onchange="loadFile(event)" id="file" required="required"/>
+          <input type="file" name="image" accept="image/jpeg, image/jpg" onchange="loadFile(event)" id="file" required="required"/>
 
         </div>
         <div class="form-group">
